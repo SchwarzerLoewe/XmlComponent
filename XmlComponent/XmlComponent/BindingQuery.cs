@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics.Contracts;
+using System.Text.RegularExpressions;
 
 namespace XmlComponent
 {
@@ -9,6 +10,11 @@ namespace XmlComponent
 
         public void Parse(string path)
         {
+            if (path == null)
+                throw new System.ArgumentNullException(nameof(path));
+
+            Contract.Requires(path != null);
+
             var m = Regex.Match(path, @"{(?<prop>(\[children\]|(\w|\d)+))}", RegexOptions.IgnoreCase);
 
             if(m.Success)

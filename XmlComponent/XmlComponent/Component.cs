@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Xml;
 
 namespace XmlComponent
@@ -10,6 +11,11 @@ namespace XmlComponent
 
         public void Load(string v)
         {
+            if (v == null)
+                throw new ArgumentNullException(nameof(v));
+
+            Contract.Requires(v != null);
+
             var dom = new XmlDocument();
             dom.LoadXml($"<node>{v}</node>");
 

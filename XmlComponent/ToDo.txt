@@ -1,1 +1,2 @@
 implement Binding
+implement encapulated components - component in component

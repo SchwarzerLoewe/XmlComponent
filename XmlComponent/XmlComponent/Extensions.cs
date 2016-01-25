@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Diagnostics.Contracts;
+using System.Xml;
 
 namespace XmlComponent
 {
@@ -13,7 +14,15 @@ namespace XmlComponent
             return c;
         }
         public static Component CreateComponent(this XmlDocument dom, string name, string src)
-        {
+        {            
+            if (src == null)
+                throw new System.ArgumentNullException(nameof(src));
+            if (name == null)
+                throw new System.ArgumentNullException(nameof(name));
+
+            Contract.Requires(name != null);
+            Contract.Requires(src != null);
+
             var c = new Component();
 
             ComponentStorage.Instance.Add(c);
@@ -25,6 +34,11 @@ namespace XmlComponent
         }
         public static Component CreateComponent(this XmlDocument dom, string src)
         {
+            if (src == null)
+                throw new System.ArgumentNullException(nameof(src));
+
+            Contract.Requires(src != null);
+
             var c = new Component();
             var d = new XmlDocument();
             d.LoadXml(src);
@@ -48,6 +62,10 @@ namespace XmlComponent
                     if(c.Name == component.Name)
                     {
                         var n = dom.ImportNode(component.Node, true);
+
+                        var binding = new Binding();
+
+                        binding.Apply(c, n);
 
                         dom.DocumentElement.ReplaceChild(n, c);
                     }

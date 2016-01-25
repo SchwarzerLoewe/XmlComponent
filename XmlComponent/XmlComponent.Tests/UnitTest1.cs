@@ -13,6 +13,7 @@ namespace XmlComponent.Tests
 
             dom.LoadXml("<test><hello>world</hello></test>");
             dom.CreateComponent("<hello><p>{[children]}</p></hello>");
+            dom.CreateComponent("<p><div>{[children]}</div></p>");
 
             dom.TransformComponents();
         }

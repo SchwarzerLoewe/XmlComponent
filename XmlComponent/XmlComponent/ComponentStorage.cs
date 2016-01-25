@@ -13,5 +13,18 @@ namespace XmlComponent
                 return _instance;
             }
         }
+
+        public bool ContainsComponent(string name)
+        {
+            foreach (var item in this)
+            {
+                if(item.Name == name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

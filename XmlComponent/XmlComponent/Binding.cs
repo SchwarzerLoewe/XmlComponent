@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Xml;
 
 namespace XmlComponent
@@ -13,6 +14,19 @@ namespace XmlComponent
         public void Dispose()
         {
             Attributes = null;
+        }
+
+        public void Apply(XmlNode oldNode, XmlNode newNode)
+        {
+            if (newNode == null)
+                throw new ArgumentNullException(nameof(newNode));
+            if (oldNode == null)
+                throw new ArgumentNullException(nameof(oldNode));
+
+            Contract.Requires(newNode != null);
+            Contract.Requires(oldNode != null);
+
+            //ToDo: Implement Binding
         }
     }
 }
