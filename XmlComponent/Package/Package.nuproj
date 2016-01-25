@@ -22,12 +22,12 @@
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>XmlComponent</Id>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Title>XmlComponent</Title>
     <Authors>Furesoft</Authors>
     <Owners>Furesoft</Owners>
     <Summary>An Component System for XML DOM</Summary>
-    <Description>Package</Description>
+    <Description>An Component System for XML DOM</Description>
     <ReleaseNotes>
     </ReleaseNotes>
     <ProjectUrl>https://github.com/furesoft/XmlComponent</ProjectUrl>

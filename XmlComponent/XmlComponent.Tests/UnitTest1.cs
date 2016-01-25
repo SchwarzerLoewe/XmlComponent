@@ -11,8 +11,8 @@ namespace XmlComponent.Tests
         {
             var dom = new XmlDocument();
 
-            dom.LoadXml("<test><hello></hello></test>");
-            dom.CreateComponent("hello", "<p>{[children]}</p>");
+            dom.LoadXml("<test><hello>world</hello></test>");
+            dom.CreateComponent("<hello><p>{[children]}</p></hello>");
 
             dom.TransformComponents();
         }

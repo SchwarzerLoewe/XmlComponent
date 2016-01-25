@@ -23,6 +23,21 @@ namespace XmlComponent
 
             return c;
         }
+        public static Component CreateComponent(this XmlDocument dom, string src)
+        {
+            var c = new Component();
+            var d = new XmlDocument();
+            d.LoadXml(src);
+
+            var node = d.DocumentElement.FirstChild;
+
+            c.Name = d.DocumentElement.Name;
+            c.Node = node;
+
+            ComponentStorage.Instance.Add(c);
+
+            return c;
+        }
 
         public static XmlDocument TransformComponents(this XmlDocument dom)
         {
