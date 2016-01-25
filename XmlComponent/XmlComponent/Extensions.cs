@@ -12,6 +12,17 @@ namespace XmlComponent
 
             return c;
         }
+        public static Component CreateComponent(this XmlDocument dom, string name, string src)
+        {
+            var c = new Component();
+
+            ComponentStorage.Instance.Add(c);
+
+            c.Name = name;
+            c.Load(src);
+
+            return c;
+        }
 
         public static XmlDocument TransformComponents(this XmlDocument dom)
         {
@@ -28,6 +39,12 @@ namespace XmlComponent
                 }
             }
 
+
+            return dom;
+        }
+
+        public static XmlDocument TransformIncludes(this XmlDocument dom)
+        {
 
             return dom;
         }

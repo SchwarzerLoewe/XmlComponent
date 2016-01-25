@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binding.cs" />
+    <Compile Include="BindingQuery.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="ComponentStorage.cs" />
     <Compile Include="Extensions.cs" />

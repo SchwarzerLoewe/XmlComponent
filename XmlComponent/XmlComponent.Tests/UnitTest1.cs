@@ -12,9 +12,7 @@ namespace XmlComponent.Tests
             var dom = new XmlDocument();
 
             dom.LoadXml("<test><hello></hello></test>");
-            var hello = dom.CreateComponent();
-            hello.Name = "hello";
-            hello.Load("<p>hello world</p>");
+            dom.CreateComponent("hello", "<p>hello world</p>");
 
             dom.TransformComponents();
         }
@@ -22,6 +20,10 @@ namespace XmlComponent.Tests
         [TestMethod]
         public void IncludeTest()
         {
+            var dom = new XmlDocument();
+            dom.LoadXml("<include src='' />");
+
+            dom.TransformIncludes();
         }
     }
 }
