@@ -9,11 +9,11 @@ namespace XmlComponent
 
         public void Parse(string path)
         {
-            var m = Regex.Match(path, @"{{(?<prop>(\[children\]|(\w|\d)+))}}");
+            var m = Regex.Match(path, @"{(?<prop>(\[children\]|(\w|\d)+))}", RegexOptions.IgnoreCase);
 
             if(m.Success)
             {
-                if(m.Groups["prop"].Value == "[children]")
+                if(m.Groups["prop"].Value.ToLower() == "[children]")
                 {
                     Children = true;
                 }
@@ -25,6 +25,6 @@ namespace XmlComponent
 
         }
 
-        public bool IsBindingQuery(string path) => Regex.IsMatch(path, @"{{(?<prop>(\[children\]|(\w|\d)+))}}");
+        public bool IsBindingQuery(string path) => Regex.IsMatch(path, @"{(?<prop>(\[children\]|(\w|\d)+))}", RegexOptions.IgnoreCase);
     }
 }
