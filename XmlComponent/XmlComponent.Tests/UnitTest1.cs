@@ -32,6 +32,8 @@ namespace XmlComponent.Tests
         {
             var q = new Binding();
             q.Query.Parse("{[chILdReN]}");
+
+            Assert.IsTrue(q.Query.Children);
         }
     }
 }
