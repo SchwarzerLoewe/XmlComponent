@@ -47,10 +47,20 @@ namespace XmlComponent
                 else
                 {
                     
+
+                    
                 }
             }
 
-            
+            foreach (XmlAttribute att in newNode.Attributes)
+            {
+                if (Query.IsBindingQuery(att.Value))
+                {
+                    Query.Parse(att.Value);
+
+                    newNode.Attributes[Query.Property].Value = oldNode.Attributes[Query.Property].Value;
+                }
+            }
         }
     }
 }

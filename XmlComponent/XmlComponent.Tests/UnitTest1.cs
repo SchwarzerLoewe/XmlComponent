@@ -12,7 +12,7 @@ namespace XmlComponent.Tests
             var dom = new XmlDocument();
 
             dom.LoadXml("<test><hello title='true'>world</hello></test>");
-            dom.CreateComponent("<hello><p>{title}</p></hello>");
+            dom.CreateComponent("<hello><p title='{title}'>{title}</p></hello>");
 
             dom.TransformComponents();
         }
