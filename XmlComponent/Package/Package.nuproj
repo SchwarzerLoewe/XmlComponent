@@ -13,6 +13,9 @@
   <ItemGroup>
     <ProjectReference Include="..\XmlComponent\XmlComponent.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="UnitTest1.cs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>f9ff998e-e6bd-40eb-ab8c-3cb2cba70efb</ProjectGuid>
   </PropertyGroup>
@@ -22,7 +25,7 @@
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>XmlComponent</Id>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Title>XmlComponent</Title>
     <Authors>Furesoft</Authors>
     <Owners>Furesoft</Owners>
