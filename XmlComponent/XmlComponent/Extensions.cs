@@ -78,6 +78,10 @@ namespace XmlComponent
 
         public static XmlDocument TransformIncludes(this XmlDocument dom)
         {
+            foreach (var item in dom.DocumentElement.SelectNodes("/include/"))
+            {
+
+            }
 
             return dom;
         }

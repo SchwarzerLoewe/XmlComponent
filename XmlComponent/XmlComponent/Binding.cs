@@ -27,6 +27,30 @@ namespace XmlComponent
             Contract.Requires(oldNode != null);
 
             //ToDo: Implement Binding
+
+            if(Query.IsBindingQuery(newNode.InnerText))
+            {
+                Query.Parse(newNode.InnerText);
+
+                // Children Binding - not deep
+                if(Query.Children)
+                {
+                    foreach (XmlNode node in oldNode.ChildNodes)
+                    {
+                        var tmpN = newNode.OwnerDocument.ImportNode(node, true);
+
+                        newNode.RemoveAll();
+
+                        newNode.AppendChild(tmpN);
+                    }
+                }
+                else
+                {
+                    
+                }
+            }
+
+            
         }
     }
 }

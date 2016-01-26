@@ -11,9 +11,8 @@ namespace XmlComponent.Tests
         {
             var dom = new XmlDocument();
 
-            dom.LoadXml("<test><hello>world</hello></test>");
-            dom.CreateComponent("<hello><p>{[children]}</p></hello>");
-            dom.CreateComponent("<p><div>{[children]}</div></p>");
+            dom.LoadXml("<test><hello title='true'>world</hello></test>");
+            dom.CreateComponent("<hello><p>{title}</p></hello>");
 
             dom.TransformComponents();
         }
@@ -22,7 +21,7 @@ namespace XmlComponent.Tests
         public void IncludeTest()
         {
             var dom = new XmlDocument();
-            dom.LoadXml("<include src='' />");
+            dom.LoadXml("<include src='hello.xml' type='text/component+xml' />");
 
             dom.TransformIncludes();
         }
