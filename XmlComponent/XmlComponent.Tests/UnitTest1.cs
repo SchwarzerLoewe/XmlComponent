@@ -21,7 +21,7 @@ namespace XmlComponent.Tests
         public void IncludeTest()
         {
             var dom = new XmlDocument();
-            dom.LoadXml("<include src='hello.xml' type='text/component+xml' />");
+            dom.LoadXml("<test><include src='include.xml' type='text/xml' /></test>");
 
             dom.TransformIncludes();
         }

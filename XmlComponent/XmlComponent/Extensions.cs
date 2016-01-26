@@ -78,9 +78,26 @@ namespace XmlComponent
 
         public static XmlDocument TransformIncludes(this XmlDocument dom)
         {
-            foreach (var item in dom.DocumentElement.SelectNodes("/include/"))
+            foreach (XmlNode item in dom.DocumentElement.SelectNodes("include"))
             {
+                var d = new XmlDocument();
+                d.Load(item.Attributes?["src"]?.Value);
 
+                switch (item.Attributes?["type"]?.Value)
+                {
+                    case "text/xml":
+                        var n = dom.ImportNode(d.DocumentElement, true);
+
+                        dom.DocumentElement.ReplaceChild(n, item);
+
+                        break;
+                    case "text/component+xml":
+                        dom.CreateComponent(d.ToString());
+
+                        dom.DocumentElement.RemoveChild(item);
+
+                        break;
+                }
             }
 
             return dom;
