@@ -13,6 +13,26 @@ namespace XmlComponent
 
             return c;
         }
+        public static Component CreateComponent(this XmlDocument dom, LinqComponent component)
+        {
+            var c = new Component();
+
+            var name = "";
+
+            var comp = component.CreateComponent(ref name);
+
+            var doc = new XmlDocument();
+
+            doc.Load(comp.CreateReader());
+
+            c.Node = doc.DocumentElement;
+
+            c.Name = name;
+
+            ComponentStorage.Instance.Add(c);
+
+            return c;
+        }
         public static Component CreateComponent(this XmlDocument dom, string name, string src)
         {            
             if (src == null)
@@ -25,7 +45,10 @@ namespace XmlComponent
 
             var c = new Component();
 
-            ComponentStorage.Instance.Add(c);
+            if (ComponentStorage.Instance[name] == null)
+            {
+                ComponentStorage.Instance.Add(c);
+            }
 
             c.Name = name;
             c.Load(src);
@@ -48,18 +71,21 @@ namespace XmlComponent
             c.Name = d.DocumentElement.Name;
             c.Node = node;
 
-            ComponentStorage.Instance.Add(c);
+            if (ComponentStorage.Instance[c.Name] == null)
+            {
+                ComponentStorage.Instance.Add(c);
+            }
 
             return c;
         }
 
         public static XmlDocument TransformComponents(this XmlDocument dom)
         {
-            foreach (XmlNode c in dom.DocumentElement.ChildNodes)
+            foreach (var component in ComponentStorage.Instance)
             {
-                foreach (var component in ComponentStorage.Instance)
+                foreach (XmlNode c in dom.DocumentElement.ChildNodes)
                 {
-                    if(c.Name == component.Name)
+                    if (c.Name == component.Name)
                     {
                         var n = dom.ImportNode(component.Node, true);
 
@@ -72,10 +98,8 @@ namespace XmlComponent
                 }
             }
 
-
             return dom;
         }
-
         public static XmlDocument TransformIncludes(this XmlDocument dom)
         {
             foreach (XmlNode item in dom.DocumentElement.SelectNodes("include"))
@@ -97,8 +121,22 @@ namespace XmlComponent
                         dom.DocumentElement.RemoveChild(item);
 
                         break;
+                    default:
+                        dom.CreateComponent(d.ToString());
+
+                        dom.DocumentElement.RemoveChild(item);
+
+                        break;
                 }
             }
+
+            return dom;
+        }
+
+        public static XmlDocument ApplyComponents(this XmlDocument dom)
+        {
+            dom.TransformIncludes();
+            dom.TransformComponents();
 
             return dom;
         }

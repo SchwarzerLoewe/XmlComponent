@@ -26,5 +26,21 @@ namespace XmlComponent
 
             return false;
         }
+
+        public Component this[string name]
+        {
+            get
+            {
+                foreach (var item in this)
+                {
+                    if (item.Name == name)
+                    {
+                        return item;
+                    }
+                }
+
+                return null;
+            }
+        }
     }
 }

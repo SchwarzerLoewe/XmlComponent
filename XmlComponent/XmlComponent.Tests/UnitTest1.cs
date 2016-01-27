@@ -13,6 +13,18 @@ namespace XmlComponent.Tests
 
             dom.LoadXml("<test><hello title='true'>world</hello></test>");
             dom.CreateComponent("<hello><p title='{title}'>{title}</p></hello>");
+            dom.CreateComponent("<p><li>{title}</li></p>");
+
+            dom.TransformComponents();
+        }
+
+        [TestMethod]
+        public void CustomComponentTest()
+        {
+            var dom = new XmlDocument();
+
+            dom.LoadXml("<test><people></people></test>");
+            dom.CreateComponent(new TestComponent());
 
             dom.TransformComponents();
         }
