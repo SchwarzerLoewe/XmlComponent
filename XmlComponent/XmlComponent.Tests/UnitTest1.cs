@@ -46,5 +46,16 @@ namespace XmlComponent.Tests
 
             Assert.IsTrue(q.Query.Children);
         }
+
+        [TestMethod]
+        public void TestBindings()
+        {
+            var dom = new XmlDocument();
+            dom.CreateComponent("hello", "<p w='{world}'>{world}</p>");
+
+            dom.LoadXml("<test><hello world='true'/>false</test>");
+            dom.ApplyComponents();
+            
+        }
     }
 }

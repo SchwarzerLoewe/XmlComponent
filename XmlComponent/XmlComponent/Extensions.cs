@@ -1,10 +1,19 @@
 ﻿using System.Diagnostics.Contracts;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace XmlComponent
 {
     public static class Extensions
     {
+        public static XmlDocument FromLinq(this XmlDocument dom, XDocument l)
+        {
+            dom.LoadXml(l.ToString());
+
+            return dom;
+        }
+        public static XDocument ToLinq(this XmlDocument dom) => XDocument.Parse(dom.ToString());
+
         public static Component CreateComponent(this XmlDocument dom)
         {
             var c = new Component();

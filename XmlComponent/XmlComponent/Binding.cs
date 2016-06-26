@@ -58,7 +58,7 @@ namespace XmlComponent
                 {
                     Query.Parse(att.Value);
 
-                    newNode.Attributes[Query.Property].Value = oldNode.Attributes[Query.Property].Value;
+                    newNode.Attributes[Query.Property].Value = oldNode.Attributes[Query.Property]?.Value;
                 }
             }
         }
