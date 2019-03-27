@@ -55,7 +55,6 @@ namespace XmlComponent.Tests
 
             dom.LoadXml("<test><hello world='true'/>false</test>");
             dom.ApplyComponents();
-            
         }
     }
 }
